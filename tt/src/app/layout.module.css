@@ -1,0 +1,9 @@
+.html {
+  overscroll-behavior-y: none;
+}
+
+.body {
+  margin: 0;
+  /* contain: paint; */
+  overscroll-behavior-y: none;
+}

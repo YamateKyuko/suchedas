@@ -15,7 +15,7 @@ export default function Search({ placeholder, queryName }: { placeholder: string
       params.delete(queryName);
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 500);
   return (
     <div>
       <input

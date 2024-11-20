@@ -1,4 +1,4 @@
-import { BusroutePattern, DataClasses } from "@/app/class/classes";
+import { DataClasses } from "@/app/class/classes";
 import { getDatapoints } from "@/app/lib/data";
 import BusstopPoleCard from "./busstopPole-card";
 

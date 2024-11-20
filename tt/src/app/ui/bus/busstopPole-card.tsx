@@ -10,11 +10,6 @@ import { OperatorName } from "./operator-name";
 import Link from "next/link";
 
 export default async function BusstopPoleCard({busstopPole}: {busstopPole: BusstopPole}) {
-  // busstopPole.busroutePatternIDs.join(',')
-  // const busstopPoleIDs = (busstopPole.busroutePatternIDs) ? busstopPole.busroutePatternIDs.join(',') : null;
-  // const busroutePattern = busstopPoleIDs ? await getBusroutePattern({ID: busstopPoleIDs}) : [];
-  // console.log(busstopPole);
-  // console.log(busroutePattern);
   return (
     <li>
       <h2>{busstopPole.title}</h2>
@@ -30,7 +25,6 @@ export default async function BusstopPoleCard({busstopPole}: {busstopPole: Busst
 
 async function BusroutePatterns({ids}: {ids: string[]}) {
   const BusroutePatterns = await getBusroutePattern({ID: ids.join(',')});
-  console.log(BusroutePatterns);
   return (
     <>
       {BusroutePatterns.map((res, i) => (

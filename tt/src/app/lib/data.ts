@@ -4,7 +4,7 @@ import { Bus, BusroutePattern, BusstopPole, BusTimetable, DataClasses } from "..
 // type getBusParamsType = {[k in keyof Bus]?: string[]}
 
 export async function getDatapoints(id: string): Promise<DataClasses | null> {
-  const res = await axios.get('http://127.0.0.1:3000' + '/api/Datapoints/' + id);
+  const res = await axios.get(getPath('/api/Datapoints/'), { params: {ID: id} });
   if (isArr(res.data)) {
     const data = res.data[0];
     if (!isObject(data)) return null;
@@ -18,7 +18,7 @@ export async function getDatapoints(id: string): Promise<DataClasses | null> {
 
 
 export async function getBus(params: {[k in keyof Bus]?: string}): Promise<Bus[]> {
-  const res = await axios.get('http://127.0.0.1:3000' + '/api/Bus', { params });
+  const res = await axios.get(getPath('/api/Bus'), { params });
   const clses: Bus[] = [];
 
   if (isArr(res.data)) {
@@ -32,7 +32,7 @@ export async function getBus(params: {[k in keyof Bus]?: string}): Promise<Bus[]
 };
 
 export async function getBusroutePattern(params: {[k in keyof BusroutePattern]?: string}): Promise<BusroutePattern[]> {
-  const res = await axios.get('http://127.0.0.1:3000' + '/api/BusroutePattern', { params });
+  const res = await axios.get(getPath('/api/BusroutePattern'), { params });
   const clses: BusroutePattern[] = [];
   if (isArr(res.data)) {
     res.data.forEach((data: unknown) => {
@@ -45,7 +45,7 @@ export async function getBusroutePattern(params: {[k in keyof BusroutePattern]?:
 };
 
 export async function getBusstopPole(params: {[k in keyof BusstopPole]?: string}): Promise<BusstopPole[]> {
-  const res = await axios.get('http://127.0.0.1:3000' + '/api/BusstopPole', { params });
+  const res = await axios.get(getPath('/api/BusstopPole'), { params });
   const clses: BusstopPole[] = [];
   if (isArr(res.data)) {
     res.data.forEach((data: unknown) => {
@@ -142,3 +142,7 @@ const isArr = (obj: unknown): obj is unknown[] => {
 type sthObj = {[key: string]: unknown};
 const isObject = (x: unknown): x is sthObj =>
   x !== null && (typeof x === 'object' || typeof x === 'function')
+
+
+const getPath = (path: string): string => isDevelopment() ? 'http://127.0.0.1:3000' + path : path;
+const isDevelopment = (): boolean => process.env.NODE_ENV === 'development';
